@@ -231,8 +231,54 @@
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<p><strong>这是一个滚动视图的实例。如果对于滚动视图了解但是不知道怎么用的初学者可以看看，一看就懂</strong><br>    &lt;?xml version=”1.0” encoding=”utf-8”?&gt;<br>    <scrollview xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scrollbars="vertical"><br>    <linearlayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"><br>        <imageview android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/p1" android:layout_gravity="center_horizontal"><br>        <imageview android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/p1" android:layout_gravit="" 滚动视图="" y="center_horizontal"><br>        <imageview android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/p1" android:layout_gravity="center_horizontal"><br>        <imageview android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/p1" android:layout_gravity="center_horizontal"><br>        <imageview android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/p1" android:layout_gravity="center_horizontal"><br>        <imageview android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/p1" android:layout_gravity="center_horizontal"><br>        <imageview android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/p1" android:layout_gravity="center_horizontal"><br>        <imageview android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/p1" android:layout_gravity="center_horizontal"><br>        <imageview android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/p1" android:layout_gravity="center_horizontal"><br>    </imageview></imageview></imageview></imageview></imageview></imageview></imageview></imageview></imageview></linearlayout><br>    </scrollview></p>
-
+      		<p><strong>这是一个滚动视图的实例。如果对于滚动视图了解但是不知道怎么用的初学者可以看看，一看就懂</strong><br>代码如下: </p>
+<pre><code>&lt;?xml <span class="variable">version=</span><span class="string">"1.0"</span> <span class="variable">encoding=</span><span class="string">"utf-8"</span>?&gt;
+&lt;ScrollView xmlns:<span class="variable">android=</span><span class="string">"http://schemas.android.com/apk/res/android"</span>
+android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span> 
+android:<span class="variable">layout_height=</span><span class="string">"fill_parent"</span>
+android:<span class="variable">scrollbars=</span><span class="string">"vertical"</span>&gt;
+&lt;LinearLayout android:<span class="variable">orientation=</span><span class="string">"vertical"</span>
+    android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"fill_parent"</span>&gt;
+    &lt;ImageView android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">src=</span><span class="string">"@drawable/p1"</span> 
+        android:<span class="variable">layout_gravity=</span><span class="string">"center_horizontal"</span>/&gt;
+    &lt;ImageView android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">src=</span><span class="string">"@drawable/p1"</span> 
+        android:layout_gravit 滚动视图 <span class="variable">y=</span><span class="string">"center_horizontal"</span>/&gt;
+    &lt;ImageView android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">src=</span><span class="string">"@drawable/p1"</span> 
+        android:<span class="variable">layout_gravity=</span><span class="string">"center_horizontal"</span>/&gt;
+    &lt;ImageView android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">src=</span><span class="string">"@drawable/p1"</span> 
+        android:<span class="variable">layout_gravity=</span><span class="string">"center_horizontal"</span>/&gt;
+    &lt;ImageView android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">src=</span><span class="string">"@drawable/p1"</span> 
+        android:<span class="variable">layout_gravity=</span><span class="string">"center_horizontal"</span>/&gt;
+    &lt;ImageView android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">src=</span><span class="string">"@drawable/p1"</span> 
+        android:<span class="variable">layout_gravity=</span><span class="string">"center_horizontal"</span>/&gt;
+    &lt;ImageView android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">src=</span><span class="string">"@drawable/p1"</span> 
+        android:<span class="variable">layout_gravity=</span><span class="string">"center_horizontal"</span>/&gt;
+    &lt;ImageView android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">src=</span><span class="string">"@drawable/p1"</span> 
+        android:<span class="variable">layout_gravity=</span><span class="string">"center_horizontal"</span>/&gt;
+    &lt;ImageView android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">src=</span><span class="string">"@drawable/p1"</span> 
+        android:<span class="variable">layout_gravity=</span><span class="string">"center_horizontal"</span>/&gt;
+&lt;/LinearLayout&gt;
+&lt;/ScrollView&gt;
+</code></pre>
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
