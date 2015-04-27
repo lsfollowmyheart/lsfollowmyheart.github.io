@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Archives: 2015 | L&amp;S</title>
+  <title>Android入门笔记(5)-ListView简单实例 | L&amp;S</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -84,7 +84,7 @@
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -212,76 +212,124 @@
 
         <!-- ============================ END Hero Image =========================== -->
       
-
-
-<section id="services">
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2015/04/27/Android开发入门笔记-5/">Android入门笔记(5)-ListView简单实例</a></h4>
-                            
-                            <p><time datetime="2015-04-27T12:03:20.000Z"><a href="/2015/04/27/Android开发入门笔记-5/">2015-04-27</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2015/04/25/Android开发入门笔记-4/">Android入门笔记(4)-滚动视图实例</a></h4>
-                            
-                            <p><time datetime="2015-04-25T05:03:20.000Z"><a href="/2015/04/25/Android开发入门笔记-4/">2015-04-25</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2015/04/25/Android开发入门笔记-3/">Android入门笔记(3)-TextView的属性</a></h4>
-                            
-                            <p><time datetime="2015-04-25T05:02:30.000Z"><a href="/2015/04/25/Android开发入门笔记-3/">2015-04-25</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2015/04/24/Android开发入门笔记-2/">Androi开发入门笔记(2)</a></h4>
-                            
-                            <p><time datetime="2015-04-24T12:04:01.000Z"><a href="/2015/04/24/Android开发入门笔记-2/">2015-04-24</a></time></p>
-                        </div>
-                    
-                        
-                            </div><div class="row boxes">
-                            
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2015/04/23/Android开发入门笔记-1/">Androi开发入门笔记(1)</a></h4>
-                            
-                            <p><time datetime="2015-04-23T12:04:58.000Z"><a href="/2015/04/23/Android开发入门笔记-1/">2015-04-23</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2015-04-27T12:03:20.000Z" itemprop="datePublished">
+          2015-04-27
+      </time>
+    
+    
+    | 
+    <a href='/tags/第五篇-ListView的简单实例/'>第五篇-ListView的简单实例</a>
+    
+    
+</span>
+                <h1>Android入门笔记(5)-ListView简单实例</h1>
+            </div>
         </div>
-    </div>
-</section> 
+        <div class="col-md-8 col-md-offset-2">
+      		<p>本文来自<a href="http://blog.csdn.net/hellogv/" target="_blank" rel="external">http://blog.csdn.net/hellogv/</a></p>
+<p>ListView是一个经常用到的控件，ListView里面的每个子项Item可以使一个字符串，也可以是一个组合控件。先说说ListView的实现：<br>1.准备ListView要显示的数据 ；<br>2.使用 一维或多维 动态数组 保存数据；<br>2.构建适配器 ， 简单地来说， 适配器就是 Item数组 ， 动态数组 有多少元素就生成多少个Item；<br>3.把 适配器 添加到ListView,并显示出来。</p>
+<p>接下来，看看本文代码所实现的ListView:<br><img src="http://i1.tietuku.com/6258784c795fb954.png" alt="listview"></p>
+<p>接下来，就开始UI的XML代码：<br>main.xml代码如下，很简单，也不需要多做解释了：</p>
+<pre><code><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>  
+<span class="tag">&lt;<span class="title">LinearLayout</span>   
+    <span class="attribute">android:id</span>=<span class="value">"@+id/LinearLayout01"</span>   
+    <span class="attribute">android:layout_width</span>=<span class="value">"fill_parent"</span>   
+    <span class="attribute">android:layout_height</span>=<span class="value">"fill_parent"</span>   
+    <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span>&gt;</span>  
 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>Just for fun     Happiness help you grow</p>
+    <span class="tag">&lt;<span class="title">ListView</span> <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>   
+              <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>   
+              <span class="attribute">android:id</span>=<span class="value">"@+id/MyListView"</span>&gt;</span>  
+    <span class="tag">&lt;/<span class="title">ListView</span>&gt;</span>  
+<span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span>  
+</code></pre><p>my_listitem.xml的代码如下，my_listitem.xml用于设计ListView的Item：</p>
+<pre><code>&lt;?xml <span class="variable">version=</span><span class="string">"1.0"</span> <span class="variable">encoding=</span><span class="string">"utf-8"</span>?&gt;  
+&lt;LinearLayout   
+    android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span>   
+    xmlns:<span class="variable">android=</span><span class="string">"http://schemas.android.com/apk/res/android"</span>   
+    android:<span class="variable">orientation=</span><span class="string">"vertical"</span>  
+    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>   
+    android:<span class="variable">id=</span><span class="string">"@+id/MyListItem"</span>   
+    android:<span class="variable">paddingBottom=</span><span class="string">"3dip"</span>   
+    android:<span class="variable">paddingLeft=</span><span class="string">"10dip"</span>&gt;  
+    &lt;TextView   
+            android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>   
+            android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span>   
+            android:<span class="variable">id=</span><span class="string">"@+id/ItemTitle"</span>   
+            android:<span class="variable">textSize=</span><span class="string">"30dip"</span>&gt;  
+    &lt;/TextView&gt;  
+    &lt;TextView   
+            android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>   
+            android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span>   
+            android:<span class="variable">id=</span><span class="string">"@+id/ItemText"</span>&gt;  
+    &lt;/TextView&gt;  
+&lt;/LinearLayout&gt;  
+</code></pre><p>解释一下，里面用到的一些属性：<br>1.paddingBottom=”3dip”，Layout往底部留出3个像素的空白区域<br>2.paddingLeft=”10dip”，Layout往左边留出10个像素的空白区域<br>3.textSize=”30dip”，TextView的字体为30个像素那么大。</p>
+<p>最后就是JAVA的源代码：</p>
+<pre><code><span class="keyword">public</span> <span class="keyword">void</span> onCreate(Bundle savedInstanceState) {  
+    <span class="keyword">super</span>.onCreate(savedInstanceState);  
+    setContentView(R.layout.main);  
+<span class="comment">//绑定XML中的ListView，作为Item的容器  </span>
+    ListView list = (ListView) findViewById(R.id.MyListView);  
+
+<span class="comment">//生成动态数组，并且转载数据  </span>
+    ArrayList&lt;<span class="keyword">HashMap</span>&lt;<span class="keyword">String</span>, <span class="keyword">String</span>&gt;&gt; mylist = <span class="keyword">new</span> ArrayList&lt;<span class="keyword">HashMap</span>&lt;<span class="keyword">String</span>, <span class="keyword">String</span>&gt;&gt;();  
+    <span class="keyword">for</span>(<span class="built_in">int</span> i=<span class="number">0</span>;i&lt;<span class="number">30</span>;i++)  
+{  
+    <span class="keyword">HashMap</span>&lt;<span class="keyword">String</span>, <span class="keyword">String</span>&gt; <span class="built_in">map</span> = <span class="keyword">new</span> <span class="keyword">HashMap</span>&lt;<span class="keyword">String</span>, <span class="keyword">String</span>&gt;();  
+    <span class="built_in">map</span>.put(<span class="string">"ItemTitle"</span>, <span class="string">"This is Title....."</span>);  
+    <span class="built_in">map</span>.put(<span class="string">"ItemText"</span>, <span class="string">"This is text....."</span>);  
+    mylist.<span class="built_in">add</span>(<span class="built_in">map</span>);  
+}  
+<span class="comment">//生成适配器，数组===》ListItem  </span>
+SimpleAdapter mSchedule = <span class="keyword">new</span> SimpleAdapter(<span class="keyword">this</span>, <span class="comment">//没什么解释  </span>
+                                            mylist,<span class="comment">//数据来源   </span>
+                                            R.layout.my_listitem,<span class="comment">//ListItem的XML实现  </span>
+
+                                            <span class="comment">//动态数组与ListItem对应的子项          </span>
+                                            <span class="keyword">new</span> <span class="keyword">String</span>[] {<span class="string">"ItemTitle"</span>, <span class="string">"ItemText"</span>},   
+
+                                            <span class="comment">//ListItem的XML文件里面的两个TextView ID  </span>
+                                            <span class="keyword">new</span> <span class="built_in">int</span>[] {R.id.ItemTitle,R.id.ItemText});  
+<span class="comment">//添加并且显示  </span>
+list.setAdapter(mSchedule);  
+}  
+</code></pre>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
+        <nav class="pagination" role="pagination">
+    
+    
+    <a class="pull-right" href="/2015/04/25/Android开发入门笔记-4/">
+        Android入门笔记(4)-滚动视图实例 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+<div class="ds-thread" data-thread-key="2015/04/27/Android开发入门笔记-5/" data-title="Android入门笔记(5)-ListView简单实例" data-url="http://yoursite.com/2015/04/27/Android开发入门笔记-5/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"duoshuo_name"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 
