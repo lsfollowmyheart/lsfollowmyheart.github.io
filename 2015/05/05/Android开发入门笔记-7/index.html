@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+
+<head>
+  <title>Android入门笔记(7)-利用BaseAdapter实现ListView滑动删除 | L&amp;S</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="L&S">
+    <meta name="author" content="Lv">
+    <meta name="description" content="红叶飘零，震荡我的心灵" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/my.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="L&amp;S" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- Google Webfonts (Monserrat 400/700, Open Sans 400/600) -->
+    <link href='//fonts.useso.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.useso.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+
+    <!-- Load our fonts individually if IE8+, to avoid faux bold & italic rendering -->
+    <!--[if IE]>
+    <link href='http://fonts.useso.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+  
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?96bdfb8312ba027cb3ab299554d7e443";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+	  
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            
+        	<li>
+        		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/categories/Android开发入门笔记/" class="animsition-link">Android开发入门笔记<small>(5)</small></a></li>
+				    
+				    <li><a href="/categories/Androi开发入门笔记/" class="animsition-link">Androi开发入门笔记<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/Androi�������uʼ�/" class="animsition-link">Androi�������űʼ�<small>(0)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/lg.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">L&S</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/lsfollowmyheart" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <!-- ============================ Hero Image =========================== -->
+
+        <section id="hero" class="scrollme">
+            <div class="container-fluid element-img" style="background: url(/img/1.jpg) no-repeat center center fixed">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
+                        <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
+                            <div>
+                            	
+                                <h2>YOU'VE MADE A <span>BRAVE</span> DECISION, WELCOME.</h2>
+                                <p></p>
+				    			
+                                <h2></h2>
+                                <p>每一分钟的思考都是在努力证明活着的意义</p>
+				    			
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- // .col-md-12 -->
+                </div>
+                <div class="herofade beige-dk"></div>
+            </div>
+        </section>
+
+        <!-- Height spacing helper -->
+        <div class="heightblock"></div>
+        <!-- // End height spacing helper -->
+
+        <!-- ============================ END Hero Image =========================== -->
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2015-05-05T14:16:00.000Z" itemprop="datePublished">
+          2015-05-05
+      </time>
+    
+    
+    | 
+    <a href='/tags/第七篇-使用BaseAdapter实现的ListView滑动删除/'>第七篇-使用BaseAdapter实现的ListView滑动删除</a>
+    
+    
+</span>
+                <h1>Android入门笔记(7)-利用BaseAdapter实现ListView滑动删除</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<p>一、预计实现效果</p>
+<p><img src="http://i1.tietuku.com/45629387ff3163e7.png" alt="预计"></p>
+<p>二、核心代码ListView Adapter<br>    /** </p>
+<pre><code>* 自定义adapter 
+*<span class="annotation">@Title</span>: 
+*<span class="annotation">@Description</span>: 
+*<span class="annotation">@Author</span>:justlcw 
+*<span class="annotation">@Since</span>:<span class="number">2013</span>-<span class="number">11</span>-<span class="number">22</span> 
+*<span class="annotation">@Version</span>: 
+*/  
+<span class="class"><span class="keyword">class</span> <span class="title">MyAdapter</span> <span class="keyword">extends</span> <span class="title">BaseAdapter</span> <span class="keyword">implements</span> <span class="title">View</span>.<span class="title">OnClickListener</span>  
+</span>{  
+<span class="javadoc">/** 
+ * 这个用来填充list 
+ */</span>  
+<span class="keyword">private</span> List&lt;Integer&gt; colors;  
+<span class="javadoc">/** 
+ * context上下文,用来获得convertView 
+ */</span>  
+<span class="keyword">private</span> Context mContext;  
+<span class="javadoc">/** 
+ * 屏幕宽度,由于我们用的是HorizontalScrollView,所以按钮选项应该在屏幕外 
+ */</span>  
+<span class="keyword">private</span> <span class="keyword">int</span> mScreentWidth;  
+
+<span class="javadoc">/** 
+ * 构造方法 
+ *<span class="javadoctag"> @param</span> context 
+ *<span class="javadoctag"> @param</span> screenWidth 
+ */</span>  
+<span class="function"><span class="keyword">public</span> <span class="title">MyAdapter</span><span class="params">(Context context, <span class="keyword">int</span> screenWidth)</span>  
+</span>{  
+    <span class="comment">//初始化  </span>
+    mContext = context;  
+    mScreentWidth = screenWidth;  
+
+    <span class="comment">//填充list的内容  </span>
+    colors = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();  
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++)  
+    {  
+        colors.add(R.color.blue);  
+    }  
+}  
+
+<span class="annotation">@Override</span>  
+<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span>  
+</span>{  
+    <span class="keyword">return</span> colors.size();  
+}  
+
+<span class="annotation">@Override</span>  
+<span class="function"><span class="keyword">public</span> Object <span class="title">getItem</span><span class="params">(<span class="keyword">int</span> position)</span>  
+</span>{  
+    <span class="keyword">return</span> position;  
+}  
+
+<span class="annotation">@Override</span>  
+<span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">getItemId</span><span class="params">(<span class="keyword">int</span> position)</span>  
+</span>{  
+    <span class="keyword">return</span> position;  
+}  
+
+<span class="annotation">@Override</span>  
+<span class="function"><span class="keyword">public</span> View <span class="title">getView</span><span class="params">(<span class="keyword">int</span> position, View convertView, ViewGroup parent)</span>  
+</span>{  
+    <span class="keyword">final</span> ViewHolder holder;  
+    <span class="comment">//如果没有设置过,初始化convertView  </span>
+    <span class="keyword">if</span> (convertView == <span class="keyword">null</span>)  
+    {  
+        <span class="comment">//获得设置的view  </span>
+        convertView = LayoutInflater.from(mContext).inflate(R.layout.item_list, parent, <span class="keyword">false</span>);  
+
+        <span class="comment">//初始化holder  </span>
+        holder = <span class="keyword">new</span> ViewHolder();  
+        holder.hSView = (HorizontalScrollView) convertView.findViewById(R.id.hsv);  
+
+        holder.action = convertView.findViewById(R.id.ll_action);  
+        holder.btOne = (Button) convertView.findViewById(R.id.button1);  
+        holder.btTwo = (Button) convertView.findViewById(R.id.button2);  
+        holder.btThree = (Button) convertView.findViewById(R.id.button3);  
+
+        <span class="comment">//把位置放到view中,这样点击事件就可以知道点击的是哪一条item  </span>
+        holder.btOne.setTag(position);  
+        holder.btTwo.setTag(position);  
+        holder.btThree.setTag(position);  
+
+        holder.tvContent = (TextView) convertView.findViewById(R.id.tv);  
+
+        <span class="comment">//设置内容view的大小为屏幕宽度,这样按钮就正好被挤出屏幕外  </span>
+        holder.content = convertView.findViewById(R.id.ll_content);  
+        LayoutParams lp = holder.content.getLayoutParams();  
+        lp.width = mScreentWidth;  
+
+        convertView.setTag(holder);  
+    }  
+    <span class="keyword">else</span><span class="comment">//有直接获得ViewHolder  </span>
+    {  
+        holder = (ViewHolder) convertView.getTag();  
+    }  
+
+    <span class="comment">//设置监听事件  </span>
+    convertView.setOnTouchListener(<span class="keyword">new</span> View.OnTouchListener()  
+    {  
+        <span class="annotation">@Override</span>  
+        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onTouch</span><span class="params">(View v, MotionEvent event)</span>  
+        </span>{  
+            <span class="keyword">switch</span> (event.getAction())  
+            {  
+                <span class="keyword">case</span> MotionEvent.ACTION_UP:  
+
+                    <span class="comment">//获得ViewHolder  </span>
+                    ViewHolder viewHolder = (ViewHolder) v.getTag();  
+
+                    <span class="comment">//获得HorizontalScrollView滑动的水平方向值.  </span>
+                    <span class="keyword">int</span> scrollX = viewHolder.hSView.getScrollX();  
+
+                    <span class="comment">//获得操作区域的长度  </span>
+                    <span class="keyword">int</span> actionW = viewHolder.action.getWidth();  
+
+                    <span class="comment">//注意使用smoothScrollTo,这样效果看起来比较圆滑,不生硬  </span>
+                    <span class="comment">//如果水平方向的移动值&lt;操作区域的长度的一半,就复原  </span>
+                    <span class="keyword">if</span> (scrollX &lt; actionW / <span class="number">2</span>)  
+                    {  
+                        viewHolder.hSView.smoothScrollTo(<span class="number">0</span>, <span class="number">0</span>);  
+                    }  
+                    <span class="keyword">else</span><span class="comment">//否则的话显示操作区域  </span>
+                    {  
+                        viewHolder.hSView.smoothScrollTo(actionW, <span class="number">0</span>);  
+                    }  
+                    <span class="keyword">return</span> <span class="keyword">true</span>;  
+            }  
+            <span class="keyword">return</span> <span class="keyword">false</span>;  
+        }  
+    });  
+
+    <span class="comment">//这里防止删除一条item后,ListView处于操作状态,直接还原  </span>
+    <span class="keyword">if</span> (holder.hSView.getScrollX() != <span class="number">0</span>)  
+    {  
+        holder.hSView.scrollTo(<span class="number">0</span>, <span class="number">0</span>);  
+    }  
+
+    <span class="comment">//设置背景颜色,设置填充内容.  </span>
+    holder.content.setBackgroundResource(colors.get(position));  
+    holder.tvContent.setText(<span class="string">""</span> + position);  
+
+    <span class="comment">//设置监听事件  </span>
+    holder.btOne.setOnClickListener(<span class="keyword">this</span>);  
+    holder.btTwo.setOnClickListener(<span class="keyword">this</span>);  
+    holder.btThree.setOnClickListener(<span class="keyword">this</span>);  
+
+    <span class="keyword">return</span> convertView;  
+}  
+
+<span class="javadoc">/** 
+ * ViewHolder 
+ *@Title: 
+ *@Description:主要是避免了不断的view获取初始化. 
+ *@Author:justlcw 
+ *@Since:2013-11-22 
+ *@Version: 
+ */</span>  
+<span class="class"><span class="keyword">class</span> <span class="title">ViewHolder</span>  
+</span>{  
+    <span class="keyword">public</span> HorizontalScrollView hSView;  
+
+    <span class="keyword">public</span> View content;  
+    <span class="keyword">public</span> TextView tvContent;  
+
+    <span class="keyword">public</span> View action;  
+    <span class="keyword">public</span> Button btOne;  
+    <span class="keyword">public</span> Button btTwo;  
+    <span class="keyword">public</span> Button btThree;  
+}  
+
+<span class="annotation">@Override</span>  
+<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span>  
+</span>{  
+    <span class="keyword">int</span> position = (Integer) v.getTag();  
+    <span class="keyword">switch</span> (v.getId())  
+    {  
+        <span class="keyword">case</span> R.id.button1:  
+
+            colors.add(R.color.blue);  
+            <span class="keyword">break</span>;  
+
+        <span class="keyword">case</span> R.id.button2:  
+
+            colors.remove(position);  
+            <span class="keyword">break</span>;  
+
+        <span class="keyword">case</span> R.id.button3:  
+
+            <span class="keyword">if</span> (colors.get(position) == R.color.blue)  
+            {  
+                colors.set(position, R.color.red);  
+            }  
+            <span class="keyword">else</span>  
+            {  
+                colors.set(position, R.color.blue);  
+            }  
+            <span class="keyword">break</span>;  
+
+        <span class="keyword">default</span>:  
+            <span class="keyword">break</span>;  
+    }  
+    <span class="comment">//刷新ListView内容  </span>
+    notifyDataSetChanged();  
+}  
+}  
+</code></pre><p>R.layout.item_list</p>
+<pre><code>&lt;?xml <span class="variable">version=</span><span class="string">"1.0"</span> <span class="variable">encoding=</span><span class="string">"utf-8"</span>?&gt;  
+&lt;HorizontalScrollView xmlns:<span class="variable">android=</span><span class="string">"http://schemas.android.com/apk/res/android"</span>  
+android:<span class="variable">id=</span><span class="string">"@+id/hsv"</span>  
+android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>  
+android:<span class="variable">layout_height=</span><span class="string">"80dip"</span>  
+android:<span class="variable">scrollbars=</span><span class="string">"none"</span> &gt;  
+
+&lt;LinearLayout  
+    android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>  
+    android:<span class="variable">layout_height=</span><span class="string">"match_parent"</span>  
+    android:<span class="variable">orientation=</span><span class="string">"horizontal"</span> &gt;  
+
+    &lt;LinearLayout  
+        android:<span class="variable">id=</span><span class="string">"@+id/ll_content"</span>  
+        android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span>  
+        android:<span class="variable">layout_height=</span><span class="string">"match_parent"</span> &gt;  
+
+        &lt;TextView  
+            android:<span class="variable">id=</span><span class="string">"@+id/tv"</span>  
+            android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span>  
+            android:<span class="variable">layout_height=</span><span class="string">"match_parent"</span>  
+            android:<span class="variable">gravity=</span><span class="string">"center"</span>  
+            android:<span class="variable">text=</span><span class="string">""</span> /&gt;  
+    &lt;/LinearLayout&gt;  
+
+    &lt;LinearLayout  
+        android:<span class="variable">id=</span><span class="string">"@+id/ll_action"</span>  
+        android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>  
+        android:<span class="variable">layout_height=</span><span class="string">"match_parent"</span>  
+        android:<span class="variable">orientation=</span><span class="string">"horizontal"</span> &gt;  
+
+        &lt;Button  
+            android:<span class="variable">id=</span><span class="string">"@+id/button1"</span>  
+            android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>  
+            android:<span class="variable">layout_height=</span><span class="string">"match_parent"</span>  
+            android:<span class="variable">background=</span><span class="string">"@android:color/darker_gray"</span>  
+            android:<span class="variable">paddingLeft=</span><span class="string">"20dip"</span>  
+            android:<span class="variable">paddingRight=</span><span class="string">"20dip"</span>  
+            android:<span class="variable">text=</span><span class="string">"@string/action1"</span> /&gt;  
+
+        &lt;Button  
+            android:<span class="variable">id=</span><span class="string">"@+id/button2"</span>  
+            android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>  
+            android:<span class="variable">layout_height=</span><span class="string">"match_parent"</span>  
+            android:<span class="variable">layout_marginLeft=</span><span class="string">"2dip"</span>  
+            android:<span class="variable">layout_marginRight=</span><span class="string">"2dip"</span>  
+            android:<span class="variable">background=</span><span class="string">"@android:color/darker_gray"</span>  
+            android:<span class="variable">paddingLeft=</span><span class="string">"20dip"</span>  
+            android:<span class="variable">paddingRight=</span><span class="string">"20dip"</span>  
+            android:<span class="variable">text=</span><span class="string">"@string/action2"</span> /&gt;  
+
+        &lt;Button  
+            android:<span class="variable">id=</span><span class="string">"@+id/button3"</span>  
+            android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>  
+            android:<span class="variable">layout_height=</span><span class="string">"match_parent"</span>  
+            android:<span class="variable">background=</span><span class="string">"@android:color/darker_gray"</span>  
+            android:<span class="variable">paddingLeft=</span><span class="string">"20dip"</span>  
+            android:<span class="variable">paddingRight=</span><span class="string">"20dip"</span>  
+            android:<span class="variable">text=</span><span class="string">"@string/action3"</span> /&gt;  
+    &lt;/LinearLayout&gt;  
+&lt;/LinearLayout&gt;  
+
+&lt;/HorizontalScrollView&gt; 
+</code></pre><p><img src="http://i1.tietuku.com/3d151eee89e32249.png" alt="xg"></p>
+<p>其中：<br>                    “1”代表HorizontalScrollView的scrollX（代码中viewHolder.hSView.getScrollX()）；<br>                    “2”代表操作区域的宽度（代码中viewHolder.action.getWidth()）。<br>                   设置了HorizontalScrollView的OnTouch事件，每次手离开HorizontalScrollView的时候进行判断，<br>              也就是MotionEvent.ACTION_UP的时候，<br>                判断“1”的长度有没有大于“2”的一半，如果大于，就把“按钮1”和“按钮2”全部展示出来<br>          （代码中viewHolder.hSView.smoothScrollTo(actionW, 0)）；<br>                如果不大于就是隐藏“按钮1”和“按钮2”，也就是HorizontalScrollView复原<br>          （代码中viewHolder.hSView.smoothScrollTo(0, 0)）。</p>
+<pre><code>     这里的判断条件完全由你决定，你也可以在监听MotionEvent.ACTION_DOWN事件，从而
+根据滑动的方向再进行判断。
+</code></pre><p>三、实际效果展示</p>
+<p><img src="http://i1.tietuku.com/8bf4791fa47d3c69.png" alt="shiji"></p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    
+    <a class="pull-right" href="/2015/04/30/Android开发入门笔记-6/">
+        Android入门笔记(6)-利用BaseAdapter实现ListView →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+<div class="ds-thread" data-thread-key="2015/05/05/Android开发入门笔记-7/" data-title="Android入门笔记(7)-利用BaseAdapter实现ListView滑动删除" data-url="http://yoursite.com/2015/05/05/Android开发入门笔记-7/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"l-s"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Lv. All Rights Reserved.
+                </p>
+                <p>Theme By <a href="//go.kieran.top" style="color: #767D84">Kieran</a></p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/lsfollowmyheart" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>
